@@ -4,18 +4,20 @@
 
 # 1. Load libraries & set working directory
 #=================================================================#
+message("installing and loading packages")
 if(!require("dplyr")){
     message("Installing dplyr")
     install.packages("dplyr")
     library(dplyr)
 }
 
+message("setting working directory")
 setwd("~/Documents/PROGRAMMING/Coursera/DS/assignments/mobile-data")
-list.files()
+#list.files()
 
 # 2. Create project data directory & download required data
 #=================================================================#
-
+message("downloading data if not existing")
 # 2.1 Create data directory for project
 if (!file.exists("./datax")) {
     # 2.2 download data
@@ -34,20 +36,15 @@ if (!file.exists("./datax")) {
         file.rename("./UCI HAR Dataset", "./datax")
         message("succcessfully renamed")
     } 
-    message("another message")
     } else {
     message("folder already exists")
 }
 
 
-
-
-
-
-
 # 3. Read training and test data
 #=================================================================#
 # 3.1 read activity labels
+message("reading training and test data")
 temp <- read.table("data/activity_labels.txt", stringsAsFactors = FALSE)
 activityLabels <- tolower(temp$V2)
 
@@ -68,6 +65,7 @@ yTest <- read.table("data/test/y_test.txt", colClasses = "factor", col.names = "
 # 4. Merge train and test data
 #---------------------------------------------#
 # 4.1 Merge Training Data
+message("merge train and test data")
 train <- cbind(subjectTrain, XTrain, yTrain)
 
 # 4.2 Merge Testing Data
@@ -78,10 +76,12 @@ all <- rbind(train, test)
 
 # 5. Extract only mean and standard deviation(std) variables
 #=================================================================#
+message("extract only mean and standard deviation variables")
 selective <- all[,grep("subject|mean|Mean|std|activity", names(all))]
 
 # 6. Making variable names more descriptive
 #=================================================================#
+message("provide descriptive names to columns")
 # change f to freq, t to time
 names(selective) <- gsub("^t", "time.", names(selective))
 names(selective) <- gsub("^f", "freq.", names(selective))
@@ -112,6 +112,12 @@ names(selective) <- gsub("(\\.{2})|(\\.{3})", "\\.", names(selective))
 names(selective) <- gsub("(\\.$)", "", names(selective))
 names(selective)
 
-# 7. Create tidy data set
+# 7. Create and write tidy data set
 #=================================================================#
+message("create tidy dataset")
+# create tidy data set
 tidydata <- selective %>% group_by(subject, activity) %>% summarise_all(funs(mean))
+
+# write tidy data to local drive
+write.table(tidydata, "tidy_data.txt", row.names = FALSE)
+messae("SUCCESS !!!")
