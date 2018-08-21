@@ -1,6 +1,13 @@
 # Coursera - Getting and cleaning data project
-This is final project in [getting and cleaning data course](https://www.coursera.org/learn/data-cleaning) which is third course in [Data Science Certification]() offered by Coursera and Johns Hopkins University.
-The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set.
+Human activity recognition using smartphones data set
+
+This is final project in [getting and cleaning data course](https://www.coursera.org/learn/data-cleaning) which is third course in [Data Science Certification]() offered by Coursera and Johns Hopkins University. The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set.
+
+The repository includes the following files:
+- README.md: a description of the project
+- codeBook.md: a code book that describes the variables, the data, and any transformations or work that you performed to clean up the data
+- run_analysis.R: a script for performing the analysis
+- tidy_data.txt: a tidy data set after performing the analysis
 
 ## About the dataset
 The data linked to from the course website represent data collected from the accelerometers from the Samsung Galaxy S smartphone. A full description is available at the site where the data was obtained:
