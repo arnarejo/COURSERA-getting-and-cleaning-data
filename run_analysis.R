@@ -56,11 +56,13 @@ features <- temp$V2
 subjectTrain <- read.table("data/train/subject_train.txt", colClasses = "factor", col.names="subject")
 XTrain <- read.table("data/train/X_train.txt", col.names = features)
 yTrain <- read.table("data/train/y_train.txt", colClasses = "factor", col.names = "activity")
+levels(yTrain$activity) <- activityLabels
 
 # 3.4 read testing data
 subjectTest <- read.table("data/test/subject_test.txt", colClasses = "factor", col.names="subject")
 XTest <- read.table("data/test/X_test.txt", col.names = features)
 yTest <- read.table("data/test/y_test.txt", colClasses = "factor", col.names = "activity")
+levels(yTest$activity) <- activityLabels
 
 # 4. Merge train and test data
 #---------------------------------------------#
@@ -120,4 +122,4 @@ tidydata <- selective %>% group_by(subject, activity) %>% summarise_all(funs(mea
 
 # write tidy data to local drive
 write.table(tidydata, "tidy_data.txt", row.names = FALSE)
-messae("SUCCESS !!!")
+message("SUCCESS !!!")
