@@ -1,3 +1,4 @@
 zipData.zip
 *.zip
 datax/*
+.Rhistory
